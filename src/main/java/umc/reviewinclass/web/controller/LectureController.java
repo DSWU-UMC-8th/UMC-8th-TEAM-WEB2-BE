@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import umc.reviewinclass.apiPayload.ApiResponse;
-import umc.reviewinclass.service.LectureCommandService;
+import umc.reviewinclass.domain.lecture.Lecture;
+import umc.reviewinclass.service.LectureService.LectureCommandService;
 import umc.reviewinclass.web.dto.LectureRequestDTO;
 
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@Tag(name = "미션 API", description = "미션 관련 API 입니다.")
+@Tag(name = "강의 API", description = "강의 관련 API 입니다.")
 public class LectureController {
     private final LectureCommandService lectureCommandService;
 

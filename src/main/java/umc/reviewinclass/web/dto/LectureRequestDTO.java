@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import umc.reviewinclass.domain.enums.Platform;
+import umc.reviewinclass.domain.enums.CategoryType;
+import umc.reviewinclass.domain.enums.Level;
+import umc.reviewinclass.domain.platform.Platform;
 
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class LectureRequestDTO {
     public static class createLectureDTO{
         private String name;            // 강의명
         private String instructorName;  // 강사명
-        private Platform platform;      // 플랫폼
+        private Long platformId;      // 플랫폼 id
         private Level level;            // 난이도
         private CategoryType category;      // 카테고리
 
