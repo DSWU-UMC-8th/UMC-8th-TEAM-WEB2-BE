@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import umc.reviewinclass.apiPayload.ApiResponse;
-import umc.reviewinclass.domain.Lecture;
 import umc.reviewinclass.service.LectureCommandService;
 import umc.reviewinclass.web.dto.LectureRequestDTO;
 

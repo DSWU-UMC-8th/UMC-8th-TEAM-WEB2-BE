@@ -7,7 +7,6 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import umc.reviewinclass.domain.common.BaseEntity;
 import umc.reviewinclass.domain.enums.Category;
-import umc.reviewinclass.domain.enums.Level;
 import umc.reviewinclass.domain.enums.Platform;
 
 import java.util.ArrayList;

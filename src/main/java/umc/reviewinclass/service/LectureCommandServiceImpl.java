@@ -4,8 +4,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import umc.reviewinclass.converter.LectureConverter;
-import umc.reviewinclass.domain.Lecture;
-import umc.reviewinclass.domain.LectureImage;
 import umc.reviewinclass.repository.LectureRepository;
 import umc.reviewinclass.web.dto.LectureRequestDTO;
 

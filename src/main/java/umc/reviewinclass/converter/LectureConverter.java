@@ -1,6 +1,5 @@
 package umc.reviewinclass.converter;
 
-import umc.reviewinclass.domain.Lecture;
 import umc.reviewinclass.web.dto.LectureRequestDTO;
 
 import java.util.ArrayList;
