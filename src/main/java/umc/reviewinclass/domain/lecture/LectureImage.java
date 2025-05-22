@@ -1,9 +1,9 @@
 package umc.reviewinclass.domain.lecture;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import umc.reviewinclass.domain.common.BaseEntity;
-import umc.reviewinclass.domain.review.Review;
 
 @Entity
 @Getter
@@ -16,7 +16,8 @@ public class LectureImage extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imgId;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lecture_id")
     private Lecture lecture;
 
