@@ -8,6 +8,8 @@ import umc.reviewinclass.domain.enums.Category;
 import umc.reviewinclass.domain.enums.Level;
 import umc.reviewinclass.domain.enums.Platform;
 
+import java.util.List;
+
 public class LectureRequestDTO {
 
     @Builder
@@ -20,5 +22,7 @@ public class LectureRequestDTO {
         private Platform platform;      // 플랫폼
         private Level level;            // 난이도
         private Category category;      // 카테고리
+
+        private List<String> imgUrls;   // 강의 썸네일 url 목록
     }
 }

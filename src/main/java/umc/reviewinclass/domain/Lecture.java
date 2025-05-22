@@ -1,12 +1,17 @@
 package umc.reviewinclass.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import umc.reviewinclass.domain.common.BaseEntity;
 import umc.reviewinclass.domain.enums.Category;
 import umc.reviewinclass.domain.enums.Level;
 import umc.reviewinclass.domain.enums.Platform;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,7 +20,7 @@ import umc.reviewinclass.domain.enums.Platform;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Lecture {
+public class Lecture extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,4 +47,9 @@ public class Lecture {
     @Enumerated(EnumType.STRING)
     @Column(name = "category", nullable = false)
     private Category category;
+
+    // 강의 썸네일
+    @JsonIgnore
+    @OneToMany(mappedBy = "lecture", cascade = CascadeType.ALL)
+    private List<LectureImage> lectureImages = new ArrayList<>();
 }

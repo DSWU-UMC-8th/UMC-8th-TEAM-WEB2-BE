@@ -3,6 +3,8 @@ package umc.reviewinclass.converter;
 import umc.reviewinclass.domain.Lecture;
 import umc.reviewinclass.web.dto.LectureRequestDTO;
 
+import java.util.ArrayList;
+
 public class LectureConverter {
     public static Lecture createLecture(LectureRequestDTO.createLectureDTO request) {
         return Lecture.builder()
@@ -11,6 +13,7 @@ public class LectureConverter {
                 .platform(request.getPlatform())
                 .level(request.getLevel())
                 .category(request.getCategory())
+                .lectureImages(new ArrayList<>())
                 .build();
     }
 }
