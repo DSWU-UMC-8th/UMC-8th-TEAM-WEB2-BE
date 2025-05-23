@@ -1,4 +1,4 @@
-package umc.reviewinclass.web.dto;
+package umc.reviewinclass.web.dto.Lecture;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import umc.reviewinclass.domain.enums.CategoryType;
 import umc.reviewinclass.domain.enums.Level;
-import umc.reviewinclass.domain.platform.Platform;
 
 import java.util.List;
 
