@@ -1,7 +1,7 @@
 package umc.reviewinclass.service.LectureService;
 
-import umc.reviewinclass.web.dto.lecture_tmp.LectureResponseDTO;
-import umc.reviewinclass.web.dto.lecture_tmp.LectureSearchResponseDTO;
+import umc.reviewinclass.web.dto.lecture.LectureResponseDTO;
+import umc.reviewinclass.web.dto.lecture.LectureSearchResponseDTO;
 
 import java.util.List;
 

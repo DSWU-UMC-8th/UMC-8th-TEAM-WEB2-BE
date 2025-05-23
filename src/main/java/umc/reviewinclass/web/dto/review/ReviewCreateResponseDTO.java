@@ -9,13 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReviewResponseDTO_ {
-
+public class ReviewCreateResponseDTO {
     private Long reviewId;
-    private String content;
-    private Double rating;
-    private String period;
-    private Long likes;
-    private String createdAt;
 }
-

@@ -11,7 +11,7 @@ import umc.reviewinclass.domain.lecture.LectureImage;
 import umc.reviewinclass.domain.platform.Platform;
 import umc.reviewinclass.repository.LectureRepository;
 import umc.reviewinclass.repository.PlatformRepository;
-import umc.reviewinclass.web.dto.lecture_tmp.LectureRequestDTO;
+import umc.reviewinclass.web.dto.lecture.LectureRequestDTO;
 
 @Service
 @Transactional

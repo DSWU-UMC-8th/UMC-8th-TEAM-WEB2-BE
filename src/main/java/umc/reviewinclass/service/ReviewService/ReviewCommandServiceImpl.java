@@ -9,7 +9,7 @@ import umc.reviewinclass.domain.mapping.ReviewPlatform;
 import umc.reviewinclass.domain.platform.Platform;
 import umc.reviewinclass.domain.review.Review;
 import umc.reviewinclass.repository.ReviewPlatformRepository;
-import umc.reviewinclass.web.dto.review.ReviewCreateRequestDTO_;
+import umc.reviewinclass.web.dto.review.ReviewCreateRequestDTO;
 import umc.reviewinclass.repository.LectureRepository;
 import umc.reviewinclass.repository.PlatformRepository;
 import umc.reviewinclass.repository.ReviewRepository;
@@ -34,7 +34,7 @@ public class ReviewCommandServiceImpl implements ReviewCommandService {
      */
     @Override
     @Transactional
-    public Long createReview(ReviewCreateRequestDTO_ requestDto) {
+    public Long createReview(ReviewCreateRequestDTO requestDto) {
         Lecture lecture = lectureRepository.findById(requestDto.getLectureId())
                 .orElseThrow(() -> new IllegalArgumentException("강의를 찾을 수 없습니다."));
 
