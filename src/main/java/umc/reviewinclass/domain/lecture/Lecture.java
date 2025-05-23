@@ -35,7 +35,7 @@ public class Lecture extends BaseEntity {
     private CategoryType category;
 
     @OneToMany(mappedBy = "lecture", cascade = CascadeType.ALL)
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<>();
 
     @OneToMany(mappedBy = "lecture", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LectureImage> lectureImages = new ArrayList<>();
