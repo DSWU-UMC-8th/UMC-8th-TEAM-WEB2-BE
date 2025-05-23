@@ -5,13 +5,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import umc.reviewinclass.apiPayload.ApiResponse;
 import umc.reviewinclass.domain.lecture.Lecture;
 import umc.reviewinclass.service.LectureService.LectureCommandService;
-import umc.reviewinclass.web.dto.LectureRequestDTO;
+import umc.reviewinclass.service.LectureService.LectureQueryService;
+import umc.reviewinclass.web.dto.Lecture.LectureRequestDTO;
+import umc.reviewinclass.web.dto.Lecture.LectureResponseDTO;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,6 +19,7 @@ import umc.reviewinclass.web.dto.LectureRequestDTO;
 @Tag(name = "강의 API", description = "강의 관련 API 입니다.")
 public class LectureController {
     private final LectureCommandService lectureCommandService;
+    private final LectureQueryService lectureQueryService;
 
     @PostMapping("/api/lecture/create")
     @Operation(summary = "강의 정보 입력", description = "강의 정보 입력 API입니다.")
@@ -27,5 +28,13 @@ public class LectureController {
     ){
         Lecture response = lectureCommandService.createLecture(request);
         return ApiResponse.onSuccess(response);
+    }
+
+    @GetMapping("/api/lecture/{lectureId}")
+    @Operation(summary = "강의 정보 상세 조회", description = "강의 정보 상세 조회 API입니다.")
+    public ApiResponse<LectureResponseDTO.LectureDTO> getLectureInfo(
+            @PathVariable Long lectureId
+    ) {
+        return ApiResponse.onSuccess(lectureQueryService.getLectureInfo(lectureId));
     }
 }

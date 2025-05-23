@@ -2,7 +2,7 @@ package umc.reviewinclass.converter;
 
 import umc.reviewinclass.domain.lecture.Lecture;
 import umc.reviewinclass.domain.platform.Platform;
-import umc.reviewinclass.web.dto.LectureRequestDTO;
+import umc.reviewinclass.web.dto.Lecture.LectureRequestDTO;
 
 import java.util.ArrayList;
 

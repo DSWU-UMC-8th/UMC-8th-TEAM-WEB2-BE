@@ -28,7 +28,10 @@ public enum ErrorStatus implements BaseErrorCode {
     TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "이거는 테스트 !"),
 
     // Platform 관련 에러
-    PLATFORM_NOT_FOUND(HttpStatus.NOT_FOUND, "PLATFORM4001", "해당 플랫폼은 존재하지 않습니다.");
+    PLATFORM_NOT_FOUND(HttpStatus.NOT_FOUND, "PLATFORM4001", "해당 플랫폼은 존재하지 않습니다."),
+
+    // Lecture 관련 에러
+    LECTURE_NOT_FOUND(HttpStatus.NOT_FOUND, "LECTURE4001", "해당 강의는 존재하지 않습니다.");
 
 
     private final HttpStatus httpStatus;
