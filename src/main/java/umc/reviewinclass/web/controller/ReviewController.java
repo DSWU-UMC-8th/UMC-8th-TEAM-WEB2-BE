@@ -27,6 +27,7 @@ public class ReviewController {
         ReviewCreateResponseDTO result = new ReviewCreateResponseDTO(reviewId);
         return ResponseEntity.ok(ApiResponse.onSuccess(result));
     }
+
     @PostMapping("/{reviewId}/like")
     public ResponseEntity<?> likeReview(@PathVariable Long reviewId) {
         reviewCommandService.likeReview(reviewId);
@@ -34,5 +35,5 @@ public class ReviewController {
         ReviewLikeResponseDto result = new ReviewLikeResponseDto(reviewId, "좋아요가 등록되었습니다");
         return ResponseEntity.ok(ApiResponse.onSuccess(result));
     }
-
 }
+
