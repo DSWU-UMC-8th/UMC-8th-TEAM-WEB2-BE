@@ -8,6 +8,7 @@ import umc.reviewinclass.service.ReviewService.ReviewCommandService;
 import umc.reviewinclass.service.ReviewService.ReviewQueryService;
 import umc.reviewinclass.web.dto.review.ReviewCreateRequestDto;
 import umc.reviewinclass.web.dto.review.ReviewCreateResponseDto;
+import umc.reviewinclass.web.dto.review.ReviewLikeResponseDto;
 import umc.reviewinclass.web.dto.review.ReviewResponseDto;
 
 import java.util.List;
@@ -24,6 +25,14 @@ public class ReviewController {
     public ResponseEntity<?> createReview(@RequestBody ReviewCreateRequestDto requestDto) {
         Long reviewId = reviewCommandService.createReview(requestDto);
         ReviewCreateResponseDto result = new ReviewCreateResponseDto(reviewId);
+        return ResponseEntity.ok(ApiResponse.onSuccess(result));
+    }
+
+    @PostMapping("/{reviewId}/like")
+    public ResponseEntity<?> likeReview(@PathVariable Long reviewId) {
+        reviewCommandService.likeReview(reviewId);
+
+        ReviewLikeResponseDto result = new ReviewLikeResponseDto(reviewId, "좋아요가 등록되었습니다");
         return ResponseEntity.ok(ApiResponse.onSuccess(result));
     }
 }

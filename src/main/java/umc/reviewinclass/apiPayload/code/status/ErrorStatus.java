@@ -31,8 +31,11 @@ public enum ErrorStatus implements BaseErrorCode {
     PLATFORM_NOT_FOUND(HttpStatus.NOT_FOUND, "PLATFORM4001", "해당 플랫폼은 존재하지 않습니다."),
 
     // Lecture 관련 에러
-    LECTURE_NOT_FOUND(HttpStatus.NOT_FOUND, "LECTURE4001", "해당 강의는 존재하지 않습니다.");
+    LECTURE_NOT_FOUND(HttpStatus.NOT_FOUND, "LECTURE4001", "해당 강의는 존재하지 않습니다."),
 
+
+    // Review 관련 에러
+    REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND, "REVIEW4001", "해당 리뷰를 찾을 수 없습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
