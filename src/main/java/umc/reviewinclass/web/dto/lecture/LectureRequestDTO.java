@@ -1,4 +1,4 @@
-package umc.reviewinclass.web.dto.Lecture;
+package umc.reviewinclass.web.dto.lecture;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
