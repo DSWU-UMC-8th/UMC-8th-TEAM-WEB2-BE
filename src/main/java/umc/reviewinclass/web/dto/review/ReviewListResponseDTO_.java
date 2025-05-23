@@ -5,17 +5,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReviewResponseDTO {
+public class ReviewListResponseDTO_ {
 
-    private Long reviewId;
-    private String content;
-    private Double rating;
-    private String period;
-    private Long likes;
-    private String createdAt;
+    private List<ReviewResponseDTO_> reviews;
 }
-

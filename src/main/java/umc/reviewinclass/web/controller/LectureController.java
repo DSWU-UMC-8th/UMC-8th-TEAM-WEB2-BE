@@ -11,9 +11,9 @@ import umc.reviewinclass.apiPayload.ApiResponse;
 import umc.reviewinclass.domain.lecture.Lecture;
 import umc.reviewinclass.service.LectureService.LectureCommandService;
 import umc.reviewinclass.service.LectureService.LectureQueryService;
-import umc.reviewinclass.web.dto.lecture.LectureRequestDTO;
-import umc.reviewinclass.web.dto.lecture.LectureResponseDTO;
-import umc.reviewinclass.web.dto.lecture.LectureSearchResponseDTO;
+import umc.reviewinclass.web.dto.lecture_tmp.LectureRequestDTO;
+import umc.reviewinclass.web.dto.lecture_tmp.LectureResponseDTO;
+import umc.reviewinclass.web.dto.lecture_tmp.LectureSearchResponseDTO;
 
 import java.util.List;
 

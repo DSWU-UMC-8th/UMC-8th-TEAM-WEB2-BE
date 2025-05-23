@@ -8,9 +8,8 @@ import umc.reviewinclass.domain.lecture.Lecture;
 import umc.reviewinclass.domain.lecture.LectureImage;
 import umc.reviewinclass.domain.platform.Platform;
 import umc.reviewinclass.repository.LectureRepository;
-import umc.reviewinclass.web.dto.lecture.LectureResponseDTO;
-import umc.reviewinclass.web.dto.lecture.LectureSearchResponseDTO;
-import umc.reviewinclass.web.dto.platform.PlatformSearchResponseDTO;
+import umc.reviewinclass.web.dto.lecture_tmp.LectureResponseDTO;
+import umc.reviewinclass.web.dto.lecture_tmp.LectureSearchResponseDTO;
 
 import java.util.List;
 

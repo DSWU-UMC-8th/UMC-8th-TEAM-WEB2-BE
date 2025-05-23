@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import umc.reviewinclass.apiPayload.ApiResponse;
 import umc.reviewinclass.service.ReviewService.ReviewCommandService;
-import umc.reviewinclass.web.dto.review.ReviewCreateRequestDTO;
-import umc.reviewinclass.web.dto.review.ReviewCreateResponseDTO;
+import umc.reviewinclass.web.dto.review.ReviewCreateRequestDTO_;
+import umc.reviewinclass.web.dto.review.ReviewCreateResponseDTO_;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,9 +21,9 @@ public class ReviewController {
     // 리뷰 등록
     @PostMapping
     @Operation(summary = "리뷰 등록", description = "리뷰를 등록 API 입니다.")
-    public ResponseEntity<?> createReview(@RequestBody ReviewCreateRequestDTO requestDto) {
+    public ResponseEntity<?> createReview(@RequestBody ReviewCreateRequestDTO_ requestDto) {
         Long reviewId = reviewCommandService.createReview(requestDto);
-        ReviewCreateResponseDTO result = new ReviewCreateResponseDTO(reviewId);
+        ReviewCreateResponseDTO_ result = new ReviewCreateResponseDTO_(reviewId);
         return ResponseEntity.ok(ApiResponse.onSuccess(result));
     }
 }
