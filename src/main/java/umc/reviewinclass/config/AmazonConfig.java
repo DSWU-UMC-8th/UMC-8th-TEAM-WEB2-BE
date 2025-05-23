@@ -43,7 +43,4 @@ public class AmazonConfig {
                 .build();
     }
 
-    public String getLectureImagePath() {
-        return lectureImagePath;
-    }
 }

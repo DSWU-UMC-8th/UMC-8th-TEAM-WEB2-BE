@@ -35,4 +35,8 @@ public class AmazonS3Manager {
     public String generateLectureImageKeyName(Uuid uuid) {
         return amazonConfig.getLectureImagePath() + "/" + uuid.getUuid();
     }
+
+    public String generateReviewImageKeyName(Uuid uuid) {
+        return amazonConfig.getReviewImagePath() + "/" + uuid.getUuid();
+    }
 }
