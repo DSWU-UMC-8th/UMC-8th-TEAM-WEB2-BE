@@ -1,5 +1,6 @@
 package umc.reviewinclass.service.LectureService;
 
+import umc.reviewinclass.web.dto.lecture.LectureRatingSummaryDto;
 import umc.reviewinclass.web.dto.lecture.LectureResponseDTO;
 import umc.reviewinclass.web.dto.lecture.LectureSearchResponseDTO;
 
@@ -11,4 +12,8 @@ public interface LectureQueryService {
 
     // 강의 검색
     List<LectureSearchResponseDTO.LectureDTO> search(String query);
+
+    //강의별 평점 & 별점 개수 조회
+    LectureRatingSummaryDto getLectureRatingSummary(Long lectureId);
+
 }
