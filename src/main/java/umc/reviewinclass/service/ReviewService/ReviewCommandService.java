@@ -1,9 +1,9 @@
 package umc.reviewinclass.service.ReviewService;
 
-import umc.reviewinclass.web.dto.review.ReviewCreateRequestDto;
+import umc.reviewinclass.web.dto.review.ReviewCreateRequestDTO;
 
 public interface ReviewCommandService {
-    Long createReview(ReviewCreateRequestDto requestDto);
+    Long createReview(ReviewCreateRequestDTO requestDto);
 
     void likeReview(Long reviewId);
 }

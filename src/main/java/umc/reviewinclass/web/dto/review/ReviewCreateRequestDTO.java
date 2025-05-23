@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReviewCreateRequestDto {
+public class ReviewCreateRequestDTO {
 
     private Long lectureId;       // 강의명
     private List<Long> platformIds;      // 플랫폼명

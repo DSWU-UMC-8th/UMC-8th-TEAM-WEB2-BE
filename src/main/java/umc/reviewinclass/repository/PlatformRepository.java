@@ -6,5 +6,5 @@ import umc.reviewinclass.domain.platform.Platform;
 import java.util.Optional;
 
 public interface PlatformRepository extends JpaRepository<Platform, Long> {
-    Optional<Platform> findByName(String name);
+    Optional<Platform> findByNameContaining(String name);
 }

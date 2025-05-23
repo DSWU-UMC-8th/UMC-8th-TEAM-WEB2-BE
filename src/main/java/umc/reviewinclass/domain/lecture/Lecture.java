@@ -24,8 +24,6 @@ public class Lecture extends BaseEntity {
 
     private String name;
 
-    // private String platform; // 외래키 아님
-
     private String instructorName;
 
     @Enumerated(EnumType.STRING)
