@@ -1,9 +1,6 @@
 package umc.reviewinclass.web.dto.lecture;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import umc.reviewinclass.domain.enums.CategoryType;
 import umc.reviewinclass.domain.enums.Level;
 
@@ -13,6 +10,7 @@ public class LectureRequestDTO {
 
     @Builder
     @Getter
+    @Setter
     @NoArgsConstructor
     @AllArgsConstructor
     public static class createLectureDTO{
@@ -22,6 +20,6 @@ public class LectureRequestDTO {
         private Level level;            // 난이도
         private CategoryType category;      // 카테고리
 
-        private List<String> imgUrls;   // 강의 썸네일 url 목록
+        // private List<String> imgUrls;   // 강의 썸네일 url 목록
     }
 }

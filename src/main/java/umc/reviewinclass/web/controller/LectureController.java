@@ -5,8 +5,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import umc.reviewinclass.apiPayload.ApiResponse;
 import umc.reviewinclass.domain.lecture.Lecture;
 import umc.reviewinclass.service.LectureService.LectureCommandService;
@@ -25,12 +27,13 @@ public class LectureController {
     private final LectureCommandService lectureCommandService;
     private final LectureQueryService lectureQueryService;
 
-    @PostMapping("/api/lecture/create")
-    @Operation(summary = "강의 정보 입력", description = "강의 정보 입력 API입니다.")
+    @PostMapping(value = "/api/lecture/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(summary = "강의 정보 입력", description = "multipart/form-data로 보내야 합니다.")
     public ApiResponse<Lecture> createLecture(
-            @RequestBody @Valid LectureRequestDTO.createLectureDTO request
+            @RequestPart("request") @Valid LectureRequestDTO.createLectureDTO request,
+            @RequestPart(required = false) List<MultipartFile> images
     ) {
-        Lecture response = lectureCommandService.createLecture(request);
+        Lecture response = lectureCommandService.createLecture(request, images);
         return ApiResponse.onSuccess(response);
     }
 
