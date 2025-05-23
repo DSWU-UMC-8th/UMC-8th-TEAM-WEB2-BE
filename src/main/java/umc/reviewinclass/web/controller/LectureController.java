@@ -11,6 +11,7 @@ import umc.reviewinclass.apiPayload.ApiResponse;
 import umc.reviewinclass.domain.lecture.Lecture;
 import umc.reviewinclass.service.LectureService.LectureCommandService;
 import umc.reviewinclass.service.LectureService.LectureQueryService;
+import umc.reviewinclass.web.dto.lecture.LectureRatingSummaryDto;
 import umc.reviewinclass.web.dto.lecture.LectureRequestDTO;
 import umc.reviewinclass.web.dto.lecture.LectureResponseDTO;
 import umc.reviewinclass.web.dto.lecture.LectureSearchResponseDTO;
@@ -48,4 +49,13 @@ public class LectureController {
         List<LectureSearchResponseDTO.LectureDTO> results = lectureQueryService.search(query);
         return ResponseEntity.ok(ApiResponse.onSuccess(results));
     }
+
+
+    @GetMapping("api/lecture/{lectureId}/ratings/summary")
+    @Operation(summary = "강의 평점 및 별점 갯수 조회", description = "강의 평점 및 별점 갯수 조회 API입니다.")
+    public ResponseEntity<?> getLectureRatingSummary(@PathVariable Long lectureId) {
+        LectureRatingSummaryDto result = lectureQueryService.getLectureRatingSummary(lectureId);
+        return ResponseEntity.ok(ApiResponse.onSuccess(result));
+    }
+
 }
