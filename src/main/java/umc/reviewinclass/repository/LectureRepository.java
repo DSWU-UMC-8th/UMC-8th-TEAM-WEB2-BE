@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface LectureRepository extends JpaRepository<Lecture, Long> {
 
-    Optional<Lecture> findByNameAndInstructorNameAndPlatform(String name, String instructorName, String platform);
+    Optional<Lecture> findByNameContaining(String name);
 }
 
