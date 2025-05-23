@@ -1,5 +1,7 @@
 package umc.reviewinclass.web.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,15 +18,17 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/reviews")
+@Tag(name = "리뷰 API", description = "리뷰 관련 API 입니다.")
 public class ReviewController {
 
     private final ReviewCommandService reviewCommandService;
 
     // 리뷰 등록
     @PostMapping
-    public ResponseEntity<?> createReview(@RequestBody ReviewCreateRequestDto requestDto) {
+    @Operation(summary = "리뷰 등록", description = "리뷰를 등록 API 입니다.")
+    public ResponseEntity<?> createReview(@RequestBody ReviewCreateRequestDTO requestDto) {
         Long reviewId = reviewCommandService.createReview(requestDto);
-        ReviewCreateResponseDto result = new ReviewCreateResponseDto(reviewId);
+        ReviewCreateResponseDTO result = new ReviewCreateResponseDTO(reviewId);
         return ResponseEntity.ok(ApiResponse.onSuccess(result));
     }
 

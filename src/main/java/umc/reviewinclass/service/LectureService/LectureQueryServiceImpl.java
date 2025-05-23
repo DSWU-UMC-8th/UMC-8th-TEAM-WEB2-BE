@@ -8,7 +8,8 @@ import umc.reviewinclass.domain.lecture.Lecture;
 import umc.reviewinclass.domain.lecture.LectureImage;
 import umc.reviewinclass.domain.platform.Platform;
 import umc.reviewinclass.repository.LectureRepository;
-import umc.reviewinclass.web.dto.Lecture.LectureResponseDTO;
+import umc.reviewinclass.web.dto.lecture.LectureResponseDTO;
+import umc.reviewinclass.web.dto.lecture.LectureSearchResponseDTO;
 
 import java.util.List;
 
@@ -41,5 +42,23 @@ public class LectureQueryServiceImpl implements LectureQueryService {
                 .platformName(platform.getName())
                 .imgUrls(imgUrls)
                 .build();
+    }
+
+    /**
+     * 강의를 강의명으로 검색합니다.
+     *
+     * @param query
+     * @return LectureDTO list
+     */
+    public List<LectureSearchResponseDTO.LectureDTO> search(String query) {
+        List<LectureSearchResponseDTO.LectureDTO> lectures = lectureRepository.findByNameContaining(query).stream()
+                .map(p -> LectureSearchResponseDTO.LectureDTO.builder()
+                        .id(p.getLectureId())
+                        .name(p.getName())
+                        .instructor(p.getInstructorName())
+                        .platform(p.getPlatform().getName())
+                        .build())
+                .toList();
+        return lectures;
     }
 }
