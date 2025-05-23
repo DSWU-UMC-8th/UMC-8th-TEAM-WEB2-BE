@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReviewCreateResponseDto {
+public class ReviewCreateResponseDTO {
     private Long reviewId;
 }

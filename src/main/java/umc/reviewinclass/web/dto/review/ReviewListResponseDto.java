@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReviewListResponseDto {
+public class ReviewListResponseDTO {
 
-    private List<ReviewResponseDto> reviews;
+    private List<ReviewResponseDTO> reviews;
 }

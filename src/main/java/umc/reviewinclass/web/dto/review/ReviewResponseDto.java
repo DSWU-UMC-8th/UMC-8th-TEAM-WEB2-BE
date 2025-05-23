@@ -1,6 +1,5 @@
 package umc.reviewinclass.web.dto.review;
 
-import com.querydsl.core.annotations.QueryProjection;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReviewResponseDto {
+public class ReviewResponseDTO {
 
     private Long reviewId;
     private String content;
