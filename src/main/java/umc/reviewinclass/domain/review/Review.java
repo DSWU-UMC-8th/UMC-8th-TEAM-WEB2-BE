@@ -28,7 +28,7 @@ public class Review extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private StudyPeriod studyPeriod;
 
-    private Long likes;
+    private Long likes = 0L;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lecture_id")
@@ -39,4 +39,9 @@ public class Review extends BaseEntity {
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
     private List<ReviewPlatform> reviewPlatforms;
+
+    public void increaseLikes() {
+        this.likes++;
+    }
+
 }

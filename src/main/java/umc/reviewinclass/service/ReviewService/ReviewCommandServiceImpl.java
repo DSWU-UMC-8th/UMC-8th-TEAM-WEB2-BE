@@ -3,6 +3,8 @@ package umc.reviewinclass.service.ReviewService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import umc.reviewinclass.apiPayload.code.status.ErrorStatus;
+import umc.reviewinclass.apiPayload.exception.handler.ReviewHandler;
 import umc.reviewinclass.domain.enums.StudyPeriod;
 import umc.reviewinclass.domain.lecture.Lecture;
 import umc.reviewinclass.domain.mapping.ReviewPlatform;
@@ -61,5 +63,15 @@ public class ReviewCommandServiceImpl implements ReviewCommandService {
 
         return savedReview.getReviewId();
     }
+
+    @Override
+    @Transactional
+    public void likeReview(Long reviewId) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new ReviewHandler(ErrorStatus.REVIEW_NOT_FOUND));
+        review.increaseLikes();
+    }
+
+
 }
 

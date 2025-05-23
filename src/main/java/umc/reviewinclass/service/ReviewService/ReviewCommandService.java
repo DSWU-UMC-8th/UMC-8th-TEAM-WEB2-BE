@@ -4,4 +4,6 @@ import umc.reviewinclass.web.dto.review.ReviewCreateRequestDTO;
 
 public interface ReviewCommandService {
     Long createReview(ReviewCreateRequestDTO requestDto);
+
+    void likeReview(Long reviewId);
 }
