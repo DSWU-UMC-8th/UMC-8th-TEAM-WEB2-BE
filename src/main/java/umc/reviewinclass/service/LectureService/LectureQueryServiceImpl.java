@@ -107,4 +107,31 @@ public class LectureQueryServiceImpl implements LectureQueryService {
                 .build();
     }
 
+    @Override
+    public List<Map<String, Object>> getLectures() {
+        List<Lecture> lectures = lectureRepository.findAll();
+
+        return lectures.stream()
+            .map(lecture -> {
+                List<String> imgUrls = lecture.getLectureImages() == null ? List.of() :
+                        lecture.getLectureImages().stream()
+                                .map(LectureImage::getLectureImageUrl)
+                                .toList();
+
+                Map<String, Object> lectureMap = new LinkedHashMap<>();
+                lectureMap.put("lectureId", lecture.getLectureId());
+                lectureMap.put("lecture", LectureResponseDTO.LectureDTO.builder()
+                        .name(lecture.getName())
+                        .instructorName(lecture.getInstructorName())
+                        .platformName(lecture.getPlatform().getName())
+                        .level(lecture.getLevel())
+                        .category(lecture.getCategory())
+                        .imgUrls(imgUrls)
+                        .build()
+                );
+                return lectureMap;
+            })
+            .toList();
+    }
+
 }

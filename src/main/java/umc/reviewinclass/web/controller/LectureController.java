@@ -19,6 +19,7 @@ import umc.reviewinclass.web.dto.lecture.LectureResponseDTO;
 import umc.reviewinclass.web.dto.lecture.LectureSearchResponseDTO;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -59,6 +60,13 @@ public class LectureController {
     public ResponseEntity<?> getLectureRatingSummary(@PathVariable Long lectureId) {
         LectureRatingSummaryDto result = lectureQueryService.getLectureRatingSummary(lectureId);
         return ResponseEntity.ok(ApiResponse.onSuccess(result));
+    }
+
+    @GetMapping("/api/lectures")
+    @Operation(summary = "전체 강의 목록 조회 API", description = "전체 강의 목록 조회 API입니다.")
+    public ApiResponse<List<Map<String, Object>>> getLectures(){
+        List<Map<String, Object>> lectures = lectureQueryService.getLectures();
+        return ApiResponse.onSuccess(lectures);
     }
 
 }
