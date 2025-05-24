@@ -1,5 +1,12 @@
 package umc.reviewinclass.service.ReviewService;
 
-public interface ReviewQueryService {
+import umc.reviewinclass.web.dto.review.LatestReviewResponseDTO;
+import umc.reviewinclass.web.dto.review.PopularReviewResponseDTO;
+import umc.reviewinclass.web.dto.review.ReviewResponseDTO;
 
+import java.util.List;
+
+public interface ReviewQueryService {
+    List<PopularReviewResponseDTO> getPopularReviews();
+    List<LatestReviewResponseDTO> getLatestReviews();
 }
