@@ -7,7 +7,7 @@ import umc.reviewinclass.domain.review.Review;
 
 import java.util.List;
 
-public interface ReviewRepository extends JpaRepository<Review, Long> {
+public interface ReviewRepository extends JpaRepository<Review, Long>, ReviewRepositoryCustom {
     List<Review> findAllByLecture(Lecture lecture);
 
     @Query("SELECT r FROM Review r JOIN FETCH r.lecture l ORDER BY r.likes DESC")
