@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import umc.reviewinclass.apiPayload.ApiResponse;
 import umc.reviewinclass.service.ReviewService.ReviewCommandService;
+import umc.reviewinclass.service.ReviewService.ReviewQueryService;
 import umc.reviewinclass.web.dto.review.ReviewCreateRequestDTO;
 import umc.reviewinclass.web.dto.review.ReviewCreateResponseDTO;
 import umc.reviewinclass.web.dto.review.ReviewLikeResponseDto;
@@ -20,6 +21,8 @@ import umc.reviewinclass.web.dto.review.ReviewLikeResponseDto;
 public class ReviewController {
 
     private final ReviewCommandService reviewCommandService;
+
+    private final ReviewQueryService reviewQueryService;
 
     // 리뷰 등록
     @PostMapping(value = "/reviews", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -41,5 +44,20 @@ public class ReviewController {
         ReviewLikeResponseDto result = new ReviewLikeResponseDto(reviewId, "좋아요가 등록되었습니다");
         return ResponseEntity.ok(ApiResponse.onSuccess(result));
     }
+
+    // 인기 리뷰 조회
+    @GetMapping("/reviews/popular")
+    @Operation(summary = "인기 리뷰 조회", description = "좋아요 순으로 정렬된 리뷰 목록을 조회합니다.")
+    public ResponseEntity<?> getPopularReviews() {
+        return ResponseEntity.ok(ApiResponse.onSuccess(reviewQueryService.getPopularReviews()));
+    }
+
+    // 최신 리뷰 조회
+    @GetMapping("/reviews/latest")
+    @Operation(summary = "최신 리뷰 조회", description = "등록일 기준 최신 리뷰 목록을 조회합니다.")
+    public ResponseEntity<?> getLatestReviews() {
+        return ResponseEntity.ok(ApiResponse.onSuccess(reviewQueryService.getLatestReviews()));
+    }
+
 }
 
