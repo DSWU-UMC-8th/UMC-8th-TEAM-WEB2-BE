@@ -4,6 +4,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +18,7 @@ import umc.reviewinclass.domain.enums.Level;
 import umc.reviewinclass.domain.enums.StudyPeriod;
 import umc.reviewinclass.service.ReviewService.ReviewCommandService;
 import umc.reviewinclass.service.ReviewService.ReviewQueryService;
-import umc.reviewinclass.web.dto.review.PopularReviewResponseDTO;
-import umc.reviewinclass.web.dto.review.ReviewCreateRequestDTO;
-import umc.reviewinclass.web.dto.review.ReviewCreateResponseDTO;
-import umc.reviewinclass.web.dto.review.ReviewLikeResponseDto;
+import umc.reviewinclass.web.dto.review.*;
 
 import java.util.List;
 
@@ -54,15 +55,19 @@ public class ReviewController {
     // 인기 리뷰 조회
     @GetMapping("/reviews/popular")
     @Operation(summary = "인기 리뷰 조회", description = "좋아요 순으로 정렬된 리뷰 목록을 조회합니다.")
-    public ResponseEntity<?> getPopularReviews() {
-        return ResponseEntity.ok(ApiResponse.onSuccess(reviewQueryService.getPopularReviews()));
+    public ResponseEntity<?> getPopularReviews(@RequestParam(defaultValue = "0") int page) {
+        Pageable pageable = PageRequest.of(page, 5, Sort.by("likes").descending());
+        Page<PopularReviewResponseDTO> result = reviewQueryService.getPopularReviews(pageable);
+        return ResponseEntity.ok(ApiResponse.onSuccess(result));
     }
 
     // 최신 리뷰 조회
     @GetMapping("/reviews/latest")
     @Operation(summary = "최신 리뷰 조회", description = "등록일 기준 최신 리뷰 목록을 조회합니다.")
-    public ResponseEntity<?> getLatestReviews() {
-        return ResponseEntity.ok(ApiResponse.onSuccess(reviewQueryService.getLatestReviews()));
+    public ResponseEntity<?> getLatestReviews(@RequestParam(defaultValue = "0") int page) {
+        Pageable pageable = PageRequest.of(page, 5, Sort.by("createdAt").descending());
+        Page<LatestReviewResponseDTO> result = reviewQueryService.getLatestReviews(pageable);
+        return ResponseEntity.ok(ApiResponse.onSuccess(result));
     }
 
     // 리뷰 필터링

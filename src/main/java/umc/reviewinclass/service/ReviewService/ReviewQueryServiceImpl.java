@@ -1,6 +1,8 @@
 package umc.reviewinclass.service.ReviewService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.reviewinclass.apiPayload.code.status.ErrorStatus;
@@ -24,21 +26,17 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
     private final ReviewRepository reviewRepository;
 
     @Override
-    public List<PopularReviewResponseDTO> getPopularReviews() {
-        List<Review> reviews = reviewRepository.findTopReviews();
-        if (reviews.isEmpty()) {
-            throw new ReviewHandler(ErrorStatus.REVIEW_NOT_FOUND);
-        }
-        return ReviewConverter.toPopularDTOList(reviews);
+    public Page<PopularReviewResponseDTO> getPopularReviews(Pageable pageable) {
+        Page<Review> reviews = reviewRepository.findAll(pageable);
+        if (reviews.isEmpty()) throw new ReviewHandler(ErrorStatus.REVIEW_NOT_FOUND);
+        return reviews.map(ReviewConverter::toPopularDTO);
     }
 
     @Override
-    public List<LatestReviewResponseDTO> getLatestReviews() {
-        List<Review> reviews = reviewRepository.findRecentReviews();
-        if (reviews.isEmpty()) {
-            throw new ReviewHandler(ErrorStatus.REVIEW_NOT_FOUND);
-        }
-        return ReviewConverter.toLatestDTOList(reviews);
+    public Page<LatestReviewResponseDTO> getLatestReviews(Pageable pageable) {
+        Page<Review> reviews = reviewRepository.findAll(pageable);
+        if (reviews.isEmpty()) throw new ReviewHandler(ErrorStatus.REVIEW_NOT_FOUND);
+        return reviews.map(ReviewConverter::toLatestDTO);
     }
 
     @Override
