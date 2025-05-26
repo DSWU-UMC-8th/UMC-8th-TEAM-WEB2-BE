@@ -1,6 +1,8 @@
 package umc.reviewinclass.web.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,10 +15,13 @@ import umc.reviewinclass.apiPayload.ApiResponse;
 import umc.reviewinclass.domain.lecture.Lecture;
 import umc.reviewinclass.service.LectureService.LectureCommandService;
 import umc.reviewinclass.service.LectureService.LectureQueryService;
+import umc.reviewinclass.service.ReviewService.ReviewQueryService;
 import umc.reviewinclass.web.dto.lecture.LectureRatingSummaryDto;
 import umc.reviewinclass.web.dto.lecture.LectureRequestDTO;
 import umc.reviewinclass.web.dto.lecture.LectureResponseDTO;
 import umc.reviewinclass.web.dto.lecture.LectureSearchResponseDTO;
+import umc.reviewinclass.web.dto.review.ReviewListDTO;
+import umc.reviewinclass.web.dto.review.ReviewListResponseDTO;
 
 import java.util.List;
 import java.util.Map;
@@ -28,6 +33,7 @@ import java.util.Map;
 public class LectureController {
     private final LectureCommandService lectureCommandService;
     private final LectureQueryService lectureQueryService;
+    private final ReviewQueryService reviewQueryService;
 
     @PostMapping(value = "/api/lecture/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "강의 정보 입력", description = "multipart/form-data로 보내야 합니다.")
@@ -67,6 +73,22 @@ public class LectureController {
     public ApiResponse<List<Map<String, Object>>> getLectures(){
         List<Map<String, Object>> lectures = lectureQueryService.getLectures();
         return ApiResponse.onSuccess(lectures);
+    }
+
+    @GetMapping("api/lecture/{lectureId}/reviews")
+    @Operation(summary = "특정 강의 리뷰 목록 조회 API", description = "특정 강의 리뷰 목록 조회 API입니다.")
+    @Parameters({
+            @Parameter(name = "page", description = "페이지 번호 - 0번이 1페이지"),
+            @Parameter(name = "rating", description = "평점순"),
+            @Parameter(name = "sort", description = "정렬 필드 (추천순-recommend, 최신순-createdAt)")
+    })
+    public ApiResponse<ReviewListDTO> getLectureReviews(
+            @PathVariable Long lectureId, // 강의 id 전달
+            @RequestParam(name = "sort", required = false, defaultValue = "createdAt") String sort, // 최신순, 인기순
+            @RequestParam(name = "rating", required = false) Double rating, // 별점
+            @RequestParam(name = "page", defaultValue = "0") int page // 페이지네이션
+    ) {
+        return ApiResponse.onSuccess(reviewQueryService.getLectureReviews(lectureId, rating, sort, page));
     }
 
 }
