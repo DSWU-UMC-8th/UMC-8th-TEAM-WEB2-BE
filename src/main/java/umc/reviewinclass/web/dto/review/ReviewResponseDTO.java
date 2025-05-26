@@ -18,4 +18,3 @@ public class ReviewResponseDTO {
     private Long likes;
     private String createdAt;
 }
-
