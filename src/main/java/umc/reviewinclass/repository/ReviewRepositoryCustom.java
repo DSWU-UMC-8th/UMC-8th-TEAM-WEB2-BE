@@ -1,10 +1,10 @@
-package umc.reviewinclass.service.ReviewService;
+package umc.reviewinclass.repository;
 
-import umc.reviewinclass.web.dto.review.ReviewSearchListResponseDTO;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import umc.reviewinclass.web.dto.review.ReviewSearchListResponseDTO;
 
-public interface ReviewQueryService {
+public interface ReviewRepositoryCustom {
 
     // 리뷰 검색
     Page<ReviewSearchListResponseDTO.ReviewDTO> searchReviews(
