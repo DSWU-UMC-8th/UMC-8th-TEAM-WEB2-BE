@@ -17,7 +17,7 @@ import static umc.reviewinclass.web.dto.platform.PlatformSearchResponseDTO.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/platforms")
+@RequestMapping("/api/platforms")
 @Tag(name = "플랫폼 API", description = "플랫폼 관련 API 입니다.")
 public class PlatformController {
     private final PlatformQueryService platformQueryService;
