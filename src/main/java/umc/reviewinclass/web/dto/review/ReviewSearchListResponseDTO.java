@@ -25,6 +25,7 @@ public class ReviewSearchListResponseDTO {
     @Builder
     public static class ReviewDTO {
         private Long id;
+        private Long lectureId;
         private String content;
         private Float rating;
         private String period;

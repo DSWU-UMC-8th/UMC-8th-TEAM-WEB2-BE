@@ -55,6 +55,7 @@ public class ReviewRepositoryImpl implements ReviewRepositoryCustom {
         List<ReviewSearchListResponseDTO.ReviewDTO> results = queryFactory
                 .select(Projections.constructor(ReviewSearchListResponseDTO.ReviewDTO.class,
                         review.reviewId,
+                        review.lecture.lectureId,
                         review.content,
                         review.rating,
                         review.studyPeriod.stringValue(),
