@@ -33,6 +33,7 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
     private final ReviewRepository reviewRepository;
     private final LectureRepository lectureRepository;
 
+    // 리뷰 검색
     @Override
     public Page<ReviewSearchListResponseDTO.ReviewDTO> searchReviews(
             String query, String sort, Double minRating, Double maxRating, Pageable pageable
