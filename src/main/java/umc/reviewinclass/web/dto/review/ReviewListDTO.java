@@ -12,7 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReviewListDTO {
-    private List<ReviewResponseDTO> reviews;
+    private List<ReviewWithImageResponseDTO> reviews;
+    private Long totalMatchingReviews; // 조건에 맞는 전체 리뷰 개수
     Integer listSize;
     Integer totalPage;
     Long totalElements;

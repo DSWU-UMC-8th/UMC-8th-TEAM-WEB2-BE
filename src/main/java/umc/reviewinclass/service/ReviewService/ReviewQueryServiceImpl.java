@@ -65,16 +65,18 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
     }
 
     @Override
-    public ReviewListDTO getLectureReviews(Long lectureId, Double rating, String sortField, int page) {
+    public ReviewListDTO getLectureReviews(Long lectureId, Double ratingMin, Double ratingMax, String sortField, int page) {
         Lecture lecture = lectureRepository.findById(lectureId)
                 .orElseThrow(() -> new LectureHandler(ErrorStatus.LECTURE_NOT_FOUND));
 
-        Specification<Review> spec = Specification.where(
-                (root, query, cb) -> cb.equal(root.get("lecture"), lecture));
+        Specification<Review> spec = Specification.where((root, query, cb) -> cb.equal(root.get("lecture"), lecture));
 
-        if (rating != null) {
-            spec = spec.and((root, query, cb) ->
-                    cb.between(root.get("rating"), rating, rating + 0.49));
+        if (ratingMin != null && ratingMax != null) {
+            spec = spec.and((root, query, cb) -> cb.between(root.get("rating"), ratingMin, ratingMax));
+        } else if (ratingMin != null) {
+            spec = spec.and((root, query, cb) -> cb.greaterThanOrEqualTo(root.get("rating"), ratingMin));
+        } else if (ratingMax != null) {
+            spec = spec.and((root, query, cb) -> cb.lessThanOrEqualTo(root.get("rating"), ratingMax));
         }
 
         Sort sort = "recommend".equals(sortField)
@@ -84,16 +86,20 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
         Pageable pageable = PageRequest.of(page, 5, sort);
         Page<Review> reviewPage = reviewRepository.findAll(spec, pageable);
 
-        List<ReviewResponseDTO> dtoList = reviewPage.getContent().stream().map(review ->
-                ReviewResponseDTO.builder()
+        List<ReviewWithImageResponseDTO> dtoList = reviewPage.getContent().stream().map(review ->
+                ReviewWithImageResponseDTO.builder()
                         .reviewId(review.getReviewId())
                         .content(review.getContent())
                         .rating(Double.valueOf(review.getRating()))
                         .period(review.getStudyPeriod().getDescription())
                         .likes(review.getLikes())
+                        .imageUrl(review.getReviewImageUrl())
                         .createdAt(review.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
                         .build()
         ).toList();
+
+        // 전체 리뷰 중 조건에 맞는 리뷰 개수 (페이지 크기와 무관)
+        Long totalMatchingReviews = reviewRepository.count(spec);
 
         return ReviewListDTO.builder()
                 .reviews(dtoList)
@@ -102,6 +108,7 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
                 .totalElements(reviewPage.getTotalElements())
                 .isFirst(reviewPage.isFirst())
                 .isLast(reviewPage.isLast())
+                .totalMatchingReviews(totalMatchingReviews)  // DTO에 필드 추가 필요
                 .build();
     }
 }
