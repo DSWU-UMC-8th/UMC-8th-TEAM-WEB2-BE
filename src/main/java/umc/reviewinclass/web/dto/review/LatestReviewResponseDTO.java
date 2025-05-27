@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class LatestReviewResponseDTO {
 
     private Long reviewId;
+    private Long lectureId;
     private Double rating;
     private String studyPeriod;
     private Long likes;
