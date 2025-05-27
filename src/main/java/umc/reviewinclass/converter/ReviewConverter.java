@@ -15,6 +15,7 @@ public class ReviewConverter {
     public static PopularReviewResponseDTO toPopularDTO(Review review) {
         return PopularReviewResponseDTO.builder()
                 .reviewId(review.getReviewId())
+                .lectureId(review.getLecture().getLectureId())
                 .lectureName(review.getLecture().getName())
                 .instructorName(review.getLecture().getInstructorName())
                 .rating(review.getRating().doubleValue())
@@ -26,6 +27,7 @@ public class ReviewConverter {
     public static LatestReviewResponseDTO toLatestDTO(Review review) {
         return LatestReviewResponseDTO.builder()
                 .reviewId(review.getReviewId())
+                .lectureId(review.getLecture().getLectureId())
                 .rating(review.getRating().doubleValue())
                 .studyPeriod(review.getStudyPeriod().getDescription())
                 .likes(review.getLikes())
