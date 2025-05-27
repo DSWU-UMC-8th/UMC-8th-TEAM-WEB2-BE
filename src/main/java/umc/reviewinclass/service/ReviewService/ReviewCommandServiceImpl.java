@@ -14,6 +14,7 @@ import umc.reviewinclass.domain.mapping.ReviewPlatform;
 import umc.reviewinclass.domain.platform.Platform;
 import umc.reviewinclass.domain.review.Review;
 import umc.reviewinclass.repository.*;
+import umc.reviewinclass.service.LectureService.LectureCommandService;
 import umc.reviewinclass.web.dto.review.ReviewCreateRequestDTO;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class ReviewCommandServiceImpl implements ReviewCommandService {
     private final ReviewPlatformRepository reviewPlatformRepository;
     private final AmazonS3Manager amazonS3Manager;
     private final UuidRepository uuidRepository;
+    private final LectureCommandService lectureCommandService;
 
     /**
      * 리뷰를 등록하고, 리뷰-플랫폼 매핑 데이터를 저장합니다.
@@ -40,8 +42,18 @@ public class ReviewCommandServiceImpl implements ReviewCommandService {
     @Override
     @Transactional
     public Long createReview(ReviewCreateRequestDTO requestDto, MultipartFile image) {
-        Lecture lecture = lectureRepository.findById(requestDto.getLectureId())
-                .orElseThrow(() -> new IllegalArgumentException("강의를 찾을 수 없습니다."));
+        Lecture lecture;
+
+        // 기존 강의 ID 있으면 강의 조회
+        if (requestDto.getLectureId() != null) {
+            lecture = lectureRepository.findById(requestDto.getLectureId())
+                    .orElseThrow(() -> new IllegalArgumentException("강의를 찾을 수 없습니다."));
+        }
+        else if (requestDto.getLecture() != null) {
+            lecture = lectureCommandService.createLecture(requestDto.getLecture(), null);
+        } else {
+            throw new IllegalArgumentException("강의 정보가 필요합니다.");
+        }
 
         StudyPeriod studyPeriod = StudyPeriod.valueOf(requestDto.getStudyPeriod());
 
