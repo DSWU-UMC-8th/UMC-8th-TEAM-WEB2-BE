@@ -78,16 +78,18 @@ public class LectureController {
     @Operation(summary = "특정 강의 리뷰 목록 조회 API", description = "특정 강의 리뷰 목록 조회 API입니다.")
     @Parameters({
             @Parameter(name = "page", description = "페이지 번호 - 0번이 1페이지"),
-            @Parameter(name = "rating", description = "평점순"),
+            @Parameter(name = "ratingMin", description = "별점 최소값"),
+            @Parameter(name = "ratingMax", description = "별점 최대값"),
             @Parameter(name = "sort", description = "정렬 필드 (추천순-recommend, 최신순-createdAt)")
     })
     public ApiResponse<ReviewListDTO> getLectureReviews(
-            @PathVariable Long lectureId, // 강의 id 전달
-            @RequestParam(name = "sort", required = false, defaultValue = "createdAt") String sort, // 최신순, 인기순
-            @RequestParam(name = "rating", required = false) Double rating, // 별점
-            @RequestParam(name = "page", defaultValue = "0") int page // 페이지네이션
+            @PathVariable Long lectureId,
+            @RequestParam(name = "sort", required = false, defaultValue = "createdAt") String sort,
+            @RequestParam(name = "ratingMin", required = false) Double ratingMin,
+            @RequestParam(name = "ratingMax", required = false) Double ratingMax,
+            @RequestParam(name = "page", defaultValue = "0") int page
     ) {
-        return ApiResponse.onSuccess(reviewQueryService.getLectureReviews(lectureId, rating, sort, page));
+        return ApiResponse.onSuccess(reviewQueryService.getLectureReviews(lectureId, ratingMin, ratingMax, sort, page));
     }
 
 }

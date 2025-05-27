@@ -25,5 +25,5 @@ public interface ReviewQueryService {
 
     List<PopularReviewResponseDTO> getFilteredReviews(CategoryType category, Level level, StudyPeriod period);
 
-    ReviewListDTO getLectureReviews(Long lectureId, Double rating, String sortField, int page);
+    ReviewListDTO getLectureReviews(Long lectureId, Double ratingMin, Double ratingMax, String sortField, int page);
 }
